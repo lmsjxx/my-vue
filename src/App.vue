@@ -16,6 +16,7 @@ export default {
 *{
         margin: 0px;
         padding: 0px;
+        font-family: "PingFang SC", "Microsoft YaHei", sans-serif;
     }
     ul,ol,li{
       list-style: none;

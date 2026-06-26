@@ -8,55 +8,68 @@
       <span>每日AI快讯热闻</span>
     </div>
     {{ $route.query.imgid }}
-    <div class="news-card">
-      <h1 class="card-title">每日AI快讯热闻</h1>
-      <div class="card-meta">
-        <div class="meta-left">
-          <span class="meta-item">☰ AI快讯</span>
-          <span class="meta-item">⏱ 3天前更新</span>
-          <span class="meta-item">👥 AI小集</span>
+
+    <!-- 左右分栏容器 -->
+    <div class="layout-wrap">
+      <!-- 左侧资讯主体 -->
+      <div class="left-main">
+        <div class="news-card">
+          <h1 class="card-title">每日AI快讯热闻</h1>
+          <div class="card-meta">
+            <div class="meta-left">
+              <span class="meta-item">☰ AI快讯</span>
+              <span class="meta-item">⏱ 3天前更新</span>
+              <span class="meta-item">👥 AI小集</span>
+            </div>
+            <div class="meta-right">
+              <span class="meta-item">💬 76</span>
+              <span class="meta-item">👍 1591</span>
+            </div>
+          </div>
+
+          <hr class="divider" />
+
+          <div class="banner-box">
+            <img
+              src="https://ai-bot.cn/wp-content/uploads/2025/06/ai-news-banner-0614.png"
+              alt="每日AI快讯"
+            />
+          </div>
+
+          <p class="desc-text">
+            AI工具集每个工作日实时更新 AI 行业的最新资讯、新闻、热点、融资、产品动态、爆料等，让你随时了解人工智能领域最新趋势、更新突破和热门大事件。
+            加入<a href="#">AI交流群</a>，获取最新一手信息！
+          </p>
+
+          <div class="date-line">
+            <span class="date-tag">6月18·周四</span>
+          </div>
+
+          <div class="news-item">
+            <h3 class="item-title">阿里全面开放世界模型 HappyOyster 快乐生蚝 1.0</h3>
+            <p class="item-content">
+              阿里云上线可实时交互的开放式世界模型产品 <a href="#">HappyOyster 1.0（快乐生蚝 1.0）</a>，用户一句话可生成完整、可探索、可互动的数字世界。产品基于原生多模态架构，支持多模态输入与音视频联合生成，区别于传统一次性渲染流程，可在生成过程中持续接收用户指令并实时响应。
+            </p>
+            <p class="item-source">来源: IT之家</p>
+          </div>
         </div>
-        <div class="meta-right">
-          <span class="meta-item">💬 76</span>
-          <span class="meta-item">👍 1591</span>
-        </div>
       </div>
 
-      <hr class="divider" />
-
-      <div class="banner-box">
-        <img
-          src="https://ai-bot.cn/wp-content/uploads/2025/06/ai-news-banner-0614.png"
-          alt="每日AI快讯"
-        />
-      </div>
-
-      <!-- 简介文字 -->
-      <p class="desc-text">
-        AI工具集每个工作日实时更新 AI 行业的最新资讯、新闻、热点、融资、产品动态、爆料等，让你随时了解人工智能领域最新趋势、更新突破和热门大事件。
-        加入<a href="#">AI交流群</a>，获取最新一手信息！
-      </p>
-
-      <!-- 日期分割线 -->
-      <div class="date-line">
-        <span class="date-tag">6月18·周四</span>
-      </div>
-
-      <!-- 资讯条目 -->
-      <div class="news-item">
-        <h3 class="item-title">阿里全面开放世界模型 HappyOyster 快乐生蚝 1.0</h3>
-        <p class="item-content">
-          阿里云上线可实时交互的开放式世界模型产品 <a href="#">HappyOyster 1.0（快乐生蚝 1.0）</a>，用户一句话可生成完整、可探索、可互动的数字世界。产品基于原生多模态架构，支持多模态输入与音视频联合生成，区别于传统一次性渲染流程，可在生成过程中持续接收用户指令并实时响应。
-        </p>
-        <p class="item-source">来源: IT之家</p>
-      </div>
+      <!-- 引入右侧边栏总组件 -->
+      <RightAsideView />
     </div>
   </div>
 </template>
 
 <script>
+// 导入右侧边栏组件
+import RightAsideView from './aside/RightAsideView.vue';
+
 export default {
   name: "HotData",
+  components: {
+    RightAsideView
+  },
   data() {
     return {};
   }
@@ -64,6 +77,7 @@ export default {
 </script>
 
 <style scoped>
+/* 原有样式全部保留，末尾新增分栏样式 */
 * {
   margin: 0;
   padding: 0;
@@ -179,5 +193,15 @@ export default {
 .item-source {
   font-size: 13px;
   color: #777;
+}
+
+/* 新增左右分栏样式 */
+.layout-wrap {
+  display: flex;
+  gap: 24px;
+  align-items: flex-start;
+}
+.left-main {
+  flex: 1;
 }
 </style>

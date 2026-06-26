@@ -18,7 +18,8 @@
 
 <script>
 export default {
-  data () {l
+  data () {
+    return{
       hotList:[
         {
           "id": 1,
@@ -46,8 +47,8 @@ export default {
         }
       ]
     }
+    }
   }
-}
 </script>
 
 <style scoped>
