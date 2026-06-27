@@ -3,13 +3,23 @@
     <!-- 左侧菜单页 -->
     <ul>
       <li
-        v-on:click="jump(menu.id)"
+        v-on:click="isJump(menu)"
         v-for="(menu, index) in menuList"
         :key="index"
       >
+      
         {{ menu.linkText }}
-        <div v-for="text in menu.children" :key="text.id">
-          {{ text.linkText }}
+        <span v-if="menu.children" class="arrow" >
+          》
+        </span>
+        <div v-if="showID === menu.id">
+          <div v-for="text in menu.children" :key="text.id">
+            <div v-if="menu.children">
+              <div v-on:click="jump(text.id)">
+                {{ text.linkText }}
+              </div> 
+            </div>
+          </div>
         </div>
       </li>
     </ul>
@@ -20,6 +30,7 @@
 export default {
   data() {
     return {
+      showID: null,
       menuList: [
         {
           id: 1,
@@ -160,6 +171,25 @@ export default {
         },
       });
     },
+    toggleShow(id) {
+      // 如果当前打开的id = id,那么就是收起，其他则是打开对应id列表
+      if (this.showID === id){
+        this.showID = null
+      }else{
+        this.showID = id
+      }
+    },
+    isJump(object){
+      if(object.children&&object.children.length>0){
+        if (this.showID === object.id) {
+          this.showID = null
+        } else {
+          this.showID = object.id
+        }
+      }else{
+        this.jump(object.id)
+      }
+    }
   },
 };
 </script>
@@ -167,6 +197,10 @@ export default {
 <style lang="scss" scoped>
 * {
   position: sticky;
+}
+.arrow {
+  position: relative;
+  left: 10px;
 }
 li {
   border: 1px solid green;
