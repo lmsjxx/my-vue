@@ -52,6 +52,35 @@
             </p>
             <p class="item-source">来源: IT之家</p>
           </div>
+
+          <div class="news-item">
+            <h3 class="item-title">阿里全面开放世界模型 HappyOyster 快乐生蚝 1.0</h3>
+            <p class="item-content">
+              阿里云上线可实时交互的开放式世界模型产品 <a href="#">HappyOyster 1.0（快乐生蚝 1.0）</a>，用户一句话可生成完整、可探索、可互动的数字世界。产品基于原生多模态架构，支持多模态输入与音视频联合生成，区别于传统一次性渲染流程，可在生成过程中持续接收用户指令并实时响应。
+            </p>
+            <p class="item-source">来源: IT之家</p>
+          </div>
+          <div class="news-item">
+            <h3 class="item-title">阿里全面开放世界模型 HappyOyster 快乐生蚝 1.0</h3>
+            <p class="item-content">
+              阿里云上线可实时交互的开放式世界模型产品 <a href="#">HappyOyster 1.0（快乐生蚝 1.0）</a>，用户一句话可生成完整、可探索、可互动的数字世界。产品基于原生多模态架构，支持多模态输入与音视频联合生成，区别于传统一次性渲染流程，可在生成过程中持续接收用户指令并实时响应。
+            </p>
+            <p class="item-source">来源: IT之家</p>
+          </div>
+          <div class="news-item">
+            <h3 class="item-title">阿里全面开放世界模型 HappyOyster 快乐生蚝 1.0</h3>
+            <p class="item-content">
+              阿里云上线可实时交互的开放式世界模型产品 <a href="#">HappyOyster 1.0（快乐生蚝 1.0）</a>，用户一句话可生成完整、可探索、可互动的数字世界。产品基于原生多模态架构，支持多模态输入与音视频联合生成，区别于传统一次性渲染流程，可在生成过程中持续接收用户指令并实时响应。
+            </p>
+            <p class="item-source">来源: IT之家</p>
+          </div>
+          <div class="news-item">
+            <h3 class="item-title">阿里全面开放世界模型 HappyOyster 快乐生蚝 1.0</h3>
+            <p class="item-content">
+              阿里云上线可实时交互的开放式世界模型产品 <a href="#">HappyOyster 1.0（快乐生蚝 1.0）</a>，用户一句话可生成完整、可探索、可互动的数字世界。产品基于原生多模态架构，支持多模态输入与音视频联合生成，区别于传统一次性渲染流程，可在生成过程中持续接收用户指令并实时响应。
+            </p>
+            <p class="item-source">来源: IT之家</p>
+          </div>
         </div>
       </div>
 
@@ -77,7 +106,7 @@ export default {
 </script>
 
 <style scoped>
-/* 原有样式全部保留，末尾新增分栏样式 */
+/* 末尾新增分栏样式 */
 * {
   margin: 0;
   padding: 0;

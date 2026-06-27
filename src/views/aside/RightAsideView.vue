@@ -32,8 +32,11 @@ export default {
   padding: 20px;
   border-radius: 8px;
 } */
+ .aside-card{
+  /* border: 1px solid green; */
+ }
  .right-aside{
-    width:260px;
+    width:300px;
     position:sticky;
     top:20px;
  }
