@@ -7,18 +7,16 @@
         v-for="(menu, index) in menuList"
         :key="index"
       >
-      
         {{ menu.linkText }}
         <span v-if="menu.children" class="arrow" >
           》
         </span>
-        <div v-if="showID === menu.id">
-          <div v-for="text in menu.children" :key="text.id">
-            <div v-if="menu.children">
-              <div v-on:click="jump(text.id)">
-                {{ text.linkText }}
-              </div> 
-            </div>
+        <!-- 外层加 @click.stop 阻止冒泡，防止点击子项收起父菜单 -->
+        <div class="sub-wrap" :class="{open: showID === menu.id}">
+          <div v-for="text in menu.children" :key="text.id" class="sub-item">
+            <div v-on:click="jump(text.id)">
+              {{ text.linkText }}
+            </div> 
           </div>
         </div>
       </li>
@@ -172,7 +170,6 @@ export default {
       });
     },
     toggleShow(id) {
-      // 如果当前打开的id = id,那么就是收起，其他则是打开对应id列表
       if (this.showID === id){
         this.showID = null
       }else{
@@ -195,22 +192,57 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-* {
-  position: sticky;
+// 删除全局错误sticky
+#menu ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
 }
 .arrow {
   position: relative;
   left: 10px;
+  color: #999;
 }
 li {
   border: 1px solid green;
   padding: 15px;
   color: #606d78;
-  transition: all 0.5s ease;
+  transition: all 0.3s ease;
   font-size: 15px;
-}
-li:hover {
-  background: lightgray;
-  color: blue;
+  cursor: pointer;
+  overflow: hidden; // 配合高度动画截断内容
+
+  // 子菜单容器动画核心
+  .sub-wrap {
+    max-height: 0; // 默认收起高度0，完全隐藏不占页面空白
+    overflow: hidden;
+    transition: max-height 0.8s ease; // 下拉/收起过渡动画
+    background: #f7f8fa;
+
+
+
+
+
+
+
+    sub-item {
+      padding: 10px 0 10px 30px;
+      div {
+        cursor: pointer;
+        transition: color 0.2s;
+        &:hover {
+          color: blue;
+        }
+      }
+    }
+  }
+  // 展开状态，设置足够大高度容纳所有子项
+  .sub-wrap.open {
+    max-height: 1000px;
+  }
+  &:hover {
+    background: lightgray;
+    color: blue;
+  }
 }
 </style>
