@@ -1,24 +1,24 @@
 # my-vue
 
-## Project setup
+## 项目安装
 ```
 npm install
 ```
 
-### Compiles and hot-reloads for development
+### 编译并为开发环境提供热重载
 ```
 npm run serve
 ```
 
-### Compiles and minifies for production
+### 用于生产环境的编译与代码压缩
 ```
 npm run build
 ```
 
-### Lints and fixes files
+### 检查并修复文件
 ```
 npm run lint
 ```
 
-### Customize configuration
+### 自定义配置
 See [Configuration Reference](https://cli.vuejs.org/config/).
