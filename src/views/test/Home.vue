@@ -31,9 +31,9 @@ export default {
     #home{
         display: flex;
         margin: 20px;
+        background: #F9F9F9;
     }
     .home-menu{
-        text-align: center;
         flex: 1;
     }
     .home-wrapper{

@@ -7,16 +7,31 @@
         v-for="(menu, index) in menuList"
         :key="index"
       >
-        {{ menu.linkText }}
-        <span v-if="menu.children" class="arrow" >
-          》
-        </span>
-        <!-- 外层加 @click.stop 阻止冒泡，防止点击子项收起父菜单 -->
-        <div class="sub-wrap" :class="{open: showID === menu.id}">
+        <div class="menu-title">
+          {{ menu.linkText }}
+          <span
+            v-if="menu.children"
+            class="arrow"
+            :class="{ rotate: showID === menu.id }"
+            ><svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="16"
+              height="16"
+              fill="currentColor"
+              class="bi bi-body-text"
+              viewBox="0 0 16 16"
+            >
+              <path
+                fill-rule="evenodd"
+                d="M0 .5A.5.5 0 0 1 .5 0h4a.5.5 0 0 1 0 1h-4A.5.5 0 0 1 0 .5Zm0 2A.5.5 0 0 1 .5 2h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5Zm9 0a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5Zm-9 2A.5.5 0 0 1 .5 4h3a.5.5 0 0 1 0 1h-3a.5.5 0 0 1-.5-.5Zm5 0a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5Zm7 0a.5.5 0 0 1 .5-.5h3a.5.5 0 0 1 0 1h-3a.5.5 0 0 1-.5-.5Zm-12 2A.5.5 0 0 1 .5 6h6a.5.5 0 0 1 0 1h-6a.5.5 0 0 1-.5-.5Zm8 0a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5Zm-8 2A.5.5 0 0 1 .5 8h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5Zm7 0a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5Zm-7 2a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 0 1h-8a.5.5 0 0 1-.5-.5Zm0 2a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1h-4a.5.5 0 0 1-.5-.5Zm0 2a.5.5 0 0 1 .5-.5h2a.5.5 0 0 1 0 1h-2a.5.5 0 0 1-.5-.5Z"
+              /></svg
+          ></span>
+        </div>
+        <div class="sub-wrap" :class="{ open: showID === menu.id }">
           <div v-for="text in menu.children" :key="text.id" class="sub-item">
-            <div v-on:click="jump(text.id)">
+            <div @click="jump(text.id)" class="childText">
               {{ text.linkText }}
-            </div> 
+            </div>
           </div>
         </div>
       </li>
@@ -170,79 +185,98 @@ export default {
       });
     },
     toggleShow(id) {
-      if (this.showID === id){
-        this.showID = null
-      }else{
-        this.showID = id
+      if (this.showID === id) {
+        this.showID = null;
+      } else {
+        this.showID = id;
       }
     },
-    isJump(object){
-      if(object.children&&object.children.length>0){
+    isJump(object) {
+      if (object.children && object.children.length > 0) {
         if (this.showID === object.id) {
-          this.showID = null
+          this.showID = null;
         } else {
-          this.showID = object.id
+          this.showID = object.id;
         }
-      }else{
-        this.jump(object.id)
+      } else {
+        this.jump(object.id);
       }
-    }
+    },
   },
 };
 </script>
 
 <style lang="scss" scoped>
-// 删除全局错误sticky
-#menu ul {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-}
-.arrow {
-  position: relative;
-  left: 10px;
-  color: #999;
+#menu{
+  background: white;
+  border: 1px solid red;
 }
 li {
-  border: 1px solid green;
-  padding: 15px;
+  padding: 2px;
   color: #606d78;
-  transition: all 0.3s ease;
   font-size: 15px;
-  cursor: pointer;
-  overflow: hidden; // 配合高度动画截断内容
+  overflow: hidden;
+  // border: 1px solid green;
+  align-items: center;
+  .menu-title {
+    width: 100%;
+    box-sizing: border-box;
+    display: block;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    padding: 15px;
+    border-radius: 6px;
 
-  // 子菜单容器动画核心
+    &:hover {
+      background: #e0e0e0;
+      color: #5961f9;
+      padding-left: 22px;
+    }
+  }
+
+  // 箭头旋转样式新增
+  .arrow {
+    display: inline-block;
+    margin-left: 10px;
+    transition: transform 0.3s ease;
+  }
+  .arrow.rotate {
+    transform: rotate(90deg);
+  }
+
   .sub-wrap {
-    max-height: 0; // 默认收起高度0，完全隐藏不占页面空白
+    max-height: 0;
     overflow: hidden;
-    transition: max-height 0.8s ease; // 下拉/收起过渡动画
+    transition: max-height 0.4s ease;
     background: #f7f8fa;
+    // margin-top: 10px;
+    border-radius: 8px;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
 
-
-
-
-
-
-
-    sub-item {
-      padding: 10px 0 10px 30px;
-      div {
+    .sub-item {
+      padding: 0 12px;
+      border-bottom: 1px solid #eee;
+      &:last-child {
+        border-bottom: none;
+      }
+      .childText {
+        padding: 12px 18px;
+        font-size: 14px;
+        color: #444;
+        border-radius: 6px;
+        margin: 6px 0;
         cursor: pointer;
-        transition: color 0.2s;
+        transition: all 0.2s ease;
         &:hover {
-          color: blue;
+          background: #e0e0e0;
+          color: #5961f9;
+          padding-left: 22px;
         }
       }
     }
   }
-  // 展开状态，设置足够大高度容纳所有子项
   .sub-wrap.open {
     max-height: 1000px;
-  }
-  &:hover {
-    background: lightgray;
-    color: blue;
   }
 }
 </style>
