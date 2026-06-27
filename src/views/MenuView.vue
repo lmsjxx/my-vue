@@ -227,7 +227,6 @@ li {
   .menu-title {
     width: 100%;
     box-sizing: border-box;
-    /* 开启flex：文字居左、箭头居右、垂直居中 */
     display: flex;
     justify-content: space-between;
     align-items: center;
