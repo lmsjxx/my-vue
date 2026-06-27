@@ -8,32 +8,36 @@
         :key="index"
       >
         <div class="menu-title">
+          <span class="title-text">
+          <img v-if="menu.icon" :src="require(`@/assets/${menu.icon}`)" class="menu-icon" alt="">
           {{ menu.linkText }}
+          </span>
           <span
-            v-if="menu.children"
-            class="arrow"
-            :class="{ rotate: showID === menu.id }"
-            ><svg
+          v-if="menu.children"
+          class="arrow"
+          :class="{ rotate: showID === menu.id }"
+          >
+            <svg
               xmlns="http://www.w3.org/2000/svg"
               width="16"
               height="16"
               fill="currentColor"
-              class="bi bi-body-text"
+              class="bi bi-caret-right"
               viewBox="0 0 16 16"
             >
               <path
-                fill-rule="evenodd"
-                d="M0 .5A.5.5 0 0 1 .5 0h4a.5.5 0 0 1 0 1h-4A.5.5 0 0 1 0 .5Zm0 2A.5.5 0 0 1 .5 2h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5Zm9 0a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5Zm-9 2A.5.5 0 0 1 .5 4h3a.5.5 0 0 1 0 1h-3a.5.5 0 0 1-.5-.5Zm5 0a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5Zm7 0a.5.5 0 0 1 .5-.5h3a.5.5 0 0 1 0 1h-3a.5.5 0 0 1-.5-.5Zm-12 2A.5.5 0 0 1 .5 6h6a.5.5 0 0 1 0 1h-6a.5.5 0 0 1-.5-.5Zm8 0a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5Zm-8 2A.5.5 0 0 1 .5 8h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5Zm7 0a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5Zm-7 2a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 0 1h-8a.5.5 0 0 1-.5-.5Zm0 2a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1h-4a.5.5 0 0 1-.5-.5Zm0 2a.5.5 0 0 1 .5-.5h2a.5.5 0 0 1 0 1h-2a.5.5 0 0 1-.5-.5Z"
-              /></svg
-          ></span>
+                d="M6 12.796V3.204L11.481 8 6 12.796zm.659.753 5.48-4.796a1 1 0 0 0 0-1.506L6.66 2.451C6.011 1.885 5 2.345 5 3.204v9.592a1 1 0 0 0 1.659.753z"
+              />
+            </svg>
+          </span>
         </div>
-        <div class="sub-wrap" :class="{ open: showID === menu.id }">
-          <div v-for="text in menu.children" :key="text.id" class="sub-item">
-            <div @click="jump(text.id)" class="childText">
-              {{ text.linkText }}
+            <div class="sub-wrap" :class="{ open: showID === menu.id }">
+              <div v-for="text in menu.children" :key="text.id" class="sub-item">
+                <div @click="jump(text.id)" class="childText">
+                  {{ text.linkText }}
+                </div>
+              </div>
             </div>
-          </div>
-        </div>
       </li>
     </ul>
   </div>
@@ -47,13 +51,13 @@ export default {
       menuList: [
         {
           id: 1,
-          icon: "",
+          icon: "svg/pencil.svg",
           linkText: "AI写作工具",
           linkPath: "",
         },
         {
           id: 2,
-          icon: "",
+          icon: "svg/image-fill.svg",
           linkText: "AI图像工具",
           linkPath: "",
           children: [
@@ -69,13 +73,13 @@ export default {
         },
         {
           id: 3,
-          icon: "",
+          icon: "svg/image-fill.svg",
           linkText: "AI视频工具",
           linkPath: "",
         },
         {
           id: 4,
-          icon: "",
+          icon: "svg/image-fill.svg",
           linkText: "AI办公工具",
           linkPath: "",
           children: [
@@ -92,13 +96,13 @@ export default {
         },
         {
           id: 5,
-          icon: "",
+          icon: "svg/image-fill.svg",
           linkText: "AI聊天助手",
           linkPath: "",
         },
         {
           id: 6,
-          icon: "",
+          icon: "svg/image-fill.svg",
           linkText: "AI智能体",
           linkPath: "",
           children: [
@@ -108,67 +112,67 @@ export default {
         },
         {
           id: 7,
-          icon: "",
+          icon: "svg/image-fill.svg",
           linkText: "AI编程工具",
           linkPath: "",
         },
         {
           id: 8,
-          icon: "",
+          icon: "svg/image-fill.svg",
           linkText: "AI开发平台",
           linkPath: "",
         },
         {
           id: 9,
-          icon: "",
+          icon: "svg/image-fill.svg",
           linkText: "AI设计工具",
           linkPath: "",
         },
         {
           id: 10,
-          icon: "",
+          icon: "svg/image-fill.svg",
           linkText: "AI音频工具",
           linkPath: "",
         },
         {
           id: 11,
-          icon: "",
+          icon: "svg/image-fill.svg",
           linkText: "AI搜索引擎",
           linkPath: "",
         },
         {
           id: 12,
-          icon: "",
+          icon: "svg/image-fill.svg",
           linkText: "AI学习网站",
           linkPath: "",
         },
         {
           id: 13,
-          icon: "",
+          icon: "svg/image-fill.svg",
           linkText: "AI训练模型",
           linkPath: "",
         },
         {
           id: 14,
-          icon: "",
+          icon: "svg/image-fill.svg",
           linkText: "AI模型评测",
           linkPath: "",
         },
         {
           id: 15,
-          icon: "",
+          icon: "svg/image-fill.svg",
           linkText: "AI内容检测",
           linkPath: "",
         },
         {
           id: 16,
-          icon: "",
+          icon: "svg/image-fill.svg",
           linkText: "AI提示指令",
           linkPath: "",
         },
         {
           id: 17,
-          icon: "",
+          icon: "svg/image-fill.svg",
           linkText: "AI副业工具",
           linkPath: "",
         },
@@ -207,7 +211,10 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-#menu{
+.icon{
+  display: flex;
+}
+#menu {
   background: white;
   border: 1px solid red;
 }
@@ -216,12 +223,14 @@ li {
   color: #606d78;
   font-size: 15px;
   overflow: hidden;
-  // border: 1px solid green;
-  align-items: center;
+
   .menu-title {
     width: 100%;
     box-sizing: border-box;
-    display: block;
+    /* 开启flex：文字居左、箭头居右、垂直居中 */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
     cursor: pointer;
     transition: all 0.3s ease;
     padding: 15px;
@@ -231,17 +240,40 @@ li {
       background: #e0e0e0;
       color: #5961f9;
       padding-left: 22px;
+      
     }
-  }
 
-  // 箭头旋转样式新增
-  .arrow {
-    display: inline-block;
-    margin-left: 10px;
-    transition: transform 0.3s ease;
-  }
-  .arrow.rotate {
-    transform: rotate(90deg);
+    /* 左侧文字，不挤压箭头 */
+    .title-text {
+      flex-shrink: 0;
+    }
+
+    // ========== SVG箭头核心样式 ==========
+    .arrow {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      /* 距离右侧40px */
+      margin-right: 5px;
+      width: 30px;
+      height: 30px;
+      border-radius: 50%; // 圆形容器
+      transition: all 0.2s ease;
+      /* 旋转动画 */
+      transform-origin: center;
+      svg {
+        width: 16px;
+        height: 16px;
+      }
+      // 点击按下圆形变灰
+      &:active {
+        background-color: #d1d1d1;
+      }
+    }
+    // 菜单展开旋转90度
+    .arrow.rotate {
+      transform: rotate(90deg);
+    }
   }
 
   .sub-wrap {
@@ -249,7 +281,6 @@ li {
     overflow: hidden;
     transition: max-height 0.4s ease;
     background: #f7f8fa;
-    // margin-top: 10px;
     border-radius: 8px;
     box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
 

@@ -31,7 +31,7 @@
 
           <div class="banner-box">
             <img
-              src="https://ai-bot.cn/wp-content/uploads/2025/06/ai-news-banner-0614.png"
+              src="https://ai-bot.cn/wp-content/uploads/2024/07/daily-ai-news-image02.png "
               alt="每日AI快讯"
             />
           </div>
@@ -113,7 +113,7 @@ export default {
   box-sizing: border-box;
 }
 #hotData {
-  padding: 20px;
+  padding: 80px;
   background: #f8f9fa;
   min-height: 100vh;
 }
@@ -131,6 +131,7 @@ export default {
   background: #ffffff;
   padding: 32px;
   border-radius: 8px;
+  border: 2px solid red;
 }
 .card-title {
   font-size: 32px;
