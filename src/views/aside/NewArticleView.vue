@@ -19,12 +19,12 @@
           d="M9.5 1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-3a.5.5 0 0 1-.5-.5v-1a.5.5 0 0 1 .5-.5h3zm-3-1A1.5 1.5 0 0 0 5 1.5v1A1.5 1.5 0 0 0 6.5 4h3A1.5 1.5 0 0 0 11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3z"
         />
       </svg>
-      最新文章
+      {{myData.title}}
     </div>
     <div class="line"></div>
     <ul class="article-list">
-      <li v-for="item in articleList" :key="item.id">
-        <img :src="item.imgURL" />
+      <li v-for="item in myData.list" :key="item.id">
+        <img :src="item.imageUrl" />
         <p class="article-text">
           {{ item.title }}
         </p>
@@ -36,42 +36,7 @@
 <script>
 export default {
   name: "NewArticleView",
-  data() {
-    return {
-      articleList: [
-        {
-          id: 1,
-          title: "ChatGPT Plus 和 Claude Pro 会员代充值 – 支持支付...",
-          imgURL:
-            "https://ai-bot.cn/wp-content/uploads/2026/02/vipcheap-banner-0210.png",
-        },
-        {
-          id: 2,
-          title: "TRAE Work Design – TRAE Work 推出的全新设计模式",
-          imgURL:
-            "https://ai-bot.cn/wp-content/uploads/2026/02/vipcheap-banner-0210.png",
-        },
-        {
-          id: 3,
-          title: "Mistral OCR 4 – Mistral AI 推出的最新一代文档理...",
-          imgURL:
-            "https://ai-bot.cn/wp-content/uploads/2026/02/vipcheap-banner-0210.png",
-        },
-        {
-          id: 4,
-          title: "PhoneBuddy – 腾讯混元开源的 4B 参数手机 Agent...",
-          imgURL:
-            "https://ai-bot.cn/wp-content/uploads/2026/02/vipcheap-banner-0210.png",
-        },
-        {
-          id: 5,
-          title: "AI绘画关键词万能模板",
-          imgURL:
-            "https://ai-bot.cn/wp-content/uploads/2026/02/vipcheap-banner-0210.png",
-        },
-      ],
-    };
-  },
+  props:["myData"]
 };
 </script>
 

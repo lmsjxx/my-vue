@@ -20,7 +20,7 @@
     <div id="line"></div>
     <!-- 物件 -->
     <div id="items">
-      <div class="item" v-for="item in toolList" :key="item.id">
+      <div class="item" v-for="item in myData" :key="item.id">
         <img :src="item.logo" alt="" />
         <div>{{ item.name }}</div>
       </div>
@@ -30,85 +30,11 @@
 
 <script>
 export default {
-  name: "HotToolSView",
-  data() {
-    return {
-      toolList: [
-        {
-          id: 1,
-          name: "豆包",
-          logo: "https://ai-bot.cn/wp-content/uploads/2026/03/doubao-icon.png",
-          path: "/",
-        },
-        {
-          id: 2,
-          name: "LibTV",
-          logo: "https://ai-bot.cn/wp-content/uploads/2026/03/doubao-icon.png",
-          path: "/",
-        },
-        {
-          id: 3,
-          name: "秒哒",
-          logo: "https://ai-bot.cn/wp-content/uploads/2026/03/doubao-icon.png",
-          path: "/",
-        },
-        {
-          id: 4,
-          name: "AiPPT",
-          logo: "https://ai-bot.cn/wp-content/uploads/2026/03/doubao-icon.png",
-          path: "/",
-        },
-        {
-          id: 5,
-          name: "秘塔AI搜索",
-          logo: "https://ai-bot.cn/wp-content/uploads/2026/03/doubao-icon.png",
-          path: "/",
-        },
-        {
-          id: 6,
-          name: "TRAE编程",
-          logo: "https://ai-bot.cn/wp-content/uploads/2026/03/doubao-icon.png",
-          path: "/",
-        },
-        {
-          id: 7,
-          name: "堆友Agent",
-          logo: "https://ai-bot.cn/wp-content/uploads/2026/03/doubao-icon.png",
-          path: "/",
-        },
-        {
-          id: 8,
-          name: "美图设计室",
-          logo: "https://ai-bot.cn/wp-content/uploads/2026/03/doubao-icon.png",
-          path: "/",
-        },
-        {
-          id: 9,
-          name: "绘蛙AI",
-          logo: "https://ai-bot.cn/wp-content/uploads/2026/03/doubao-icon.png",
-          path: "/",
-        },
-        {
-          id: 10,
-          name: "Seko",
-          logo: "https://ai-bot.cn/wp-content/uploads/2026/03/doubao-icon.png",
-          path: "/",
-        },
-        {
-          id: 11,
-          name: "响指HaiSnap",
-          logo: "https://ai-bot.cn/wp-content/uploads/2026/03/doubao-icon.png",
-          path: "/",
-        },
-        {
-          id: 12,
-          name: "办公小浣熊",
-          logo: "https://ai-bot.cn/wp-content/uploads/2026/03/doubao-icon.png",
-          path: "/",
-        },
-      ],
-    };
-  },
+  props:["myData"],
+  beforeMount(){
+    console.log("你好");
+    console.log(this.myData);
+  }
 };
 </script>
 

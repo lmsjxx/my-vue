@@ -14,15 +14,15 @@
           d="M2.5 3.5a.5.5 0 0 1 0-1h11a.5.5 0 0 1 0 1h-11zm2-2a.5.5 0 0 1 0-1h7a.5.5 0 0 1 0 1h-7zM0 13a1.5 1.5 0 0 0 1.5 1.5h13A1.5 1.5 0 0 0 16 13V6a1.5 1.5 0 0 0-1.5-1.5h-13A1.5 1.5 0 0 0 0 6v7zm1.5.5A.5.5 0 0 1 1 13V6a.5.5 0 0 1 .5-.5h13a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-.5.5h-13z"
         />
       </svg>
-      最新收录
+      {{title}}
     </div>
     <!-- 横线 -->
     <div id="line"></div>
     <!-- 物件 -->
     <div id="items">
-      <div class="item" v-for="item in recordList" :key="item.id">
-        <img :src="item.logo" alt="" />
-        <div>{{ item.name }}</div>
+      <div class="item" v-for="item in NewRecord" :key="item.id">
+        <img :src="item.imgUrl" alt="" />
+        <div>{{ item.text }}</div>
       </div>
     </div>
   </div>
@@ -31,36 +31,7 @@
 <script>
 export default {
   name: "NewRecordView",
-  data() {
-    return {
-      recordList: [
-        {
-          id: 1,
-          name: "kevvee",
-          logo: "https://ai-bot.cn/wp-content/uploads/2026/03/doubao-icon.png",
-          path: "/",
-        },
-        {
-          id: 2,
-          name: "LibTV",
-          logo: "https://ai-bot.cn/wp-content/uploads/2026/03/doubao-icon.png",
-          path: "/",
-        },
-        {
-          id: 3,
-          name: "秒哒",
-          logo: "https://ai-bot.cn/wp-content/uploads/2026/03/doubao-icon.png",
-          path: "/",
-        },
-        {
-          id: 4,
-          name: "AiPPT",
-          logo: "https://ai-bot.cn/wp-content/uploads/2026/03/doubao-icon.png",
-          path: "/",
-        },
-      ],
-    };
-  },
+  props:["NewRecord","title"]
 };
 </script>
 

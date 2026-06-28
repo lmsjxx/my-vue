@@ -86,6 +86,10 @@
 
       <!-- 引入右侧边栏总组件 -->
       <RightAsideView />
+      
+    </div>
+    <div class="relevant">
+      <RelevantArticle :my-data="articles" />
     </div>
   </div>
 </template>
@@ -93,14 +97,65 @@
 <script>
 // 导入右侧边栏组件
 import RightAsideView from './aside/RightAsideView.vue';
+import RelevantArticle from './RelevantArticle.vue';
 
 export default {
   name: "HotData",
   components: {
-    RightAsideView
+    RightAsideView,
+    RelevantArticle
   },
   data() {
-    return {};
+    return {
+      articles: {
+                aixiao:'https://cravatar.cn/avatar/cb9589e040b634c184e7322391597cee?s=40&d=mm&r=g',
+                title: '相关文章',
+                list: [
+                    {
+                        "title": "AI交流群",
+                        "imageUrl": "https://ai-bot.cn/wp-content/uploads/2025/06/ai-shequn-banner-0614.png",
+                        "source": "AI小集",
+                        "views": 236,
+                        "desc": "免费AI社群相关宣传物料"
+                    },
+                    {
+                        "title": "AI快讯：4月第3期（4月21日到4月30日的AI行业新闻）",
+                        "imageUrl": "https://ai-bot.cn/wp-content/uploads/2023/04/ai-news-april-ep-03-minified.png",
+                        "source": "AI小集",
+                        "views": 220,
+                        "desc": "4月21日-4月30日汇总AI行业资讯期刊"
+                    },
+                    {
+                        "title": "Claude 官方发布《Agent 构建指南》（中文版）",
+                        "imageUrl": "https://ai-bot.cn/wp-content/uploads/2024/12/building-effective-agents-claude-website11.png",
+                        "source": "AI小集",
+                        "views": 198,
+                        "desc": "Claude官方推出智能体搭建中文指导手册"
+                    },
+                    {
+                        "title": "AI快讯：8月第1期（8月1日到8月10日的AI行业新闻）",
+                        "imageUrl": "https://ai-bot.cn/wp-content/uploads/2023/08/ai-news-aug-ep-01.png",
+                        "source": "AI小集",
+                        "views": 238,
+                        "desc": "8月1日-8月10日AI行业资讯合集"
+                    },
+                    {
+                        "title": "AI快讯：3月第3期（3月21日到3月31日的AI行业新闻）",
+                        "imageUrl": "https://ai-bot.cn/wp-content/uploads/2023/03/ai-news-march-ep-03-minified.png",
+                        "source": "AI小集",
+                        "views": 698,
+                        "desc": "3月21日-3月31日AI行业资讯期刊"
+                    },
+                    {
+                        "title": "AI快讯：3月第2期（3月11日到3月20日的AI行业新闻）",
+                        "imageUrl": "https://ai-bot.cn/wp-content/uploads/2023/03/ai-news-march-ep-02-minified.png",
+                        "source": "AI小集",
+                        "views": 496,
+                        "desc": "文件为纯图片，无法解析图片内文本内容，内容为3月11日-3月20日AI行业新闻汇总"
+                    }
+                ]
+      }
+    };
   }
 };
 </script>
