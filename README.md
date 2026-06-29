@@ -1,24 +1,332 @@
-# my-vue
+# 项目目录文档
 
-## 项目安装
+## 项目概述
+
+这是一个基于 Vue 2 + Vue Router 的 AI 工具集导航网站项目，采用左右分栏布局，左侧为分类菜单，右侧为内容展示区。
+
+---
+
+## 目录结构
+
 ```
-npm install
+src/
+├── assets/                           # 静态资源（文档原有，截图未展开）
+│   ├── svg/                          # SVG 图标文件
+│   └── logo.png                      # 网站 Logo
+├── components/                       # 公共通用组件目录
+│   └── HelloWorld.vue
+├── markdown/                     # 说明文档
+├── router/                           # 路由配置目录
+│   ├── index copy.js                 # 路由备份副本（冗余文件）
+│   └── index.js                      # 主路由配置文件
+├── views/                            # 页面视图主目录
+│   ├── aside/                        # 侧边栏专属页面组件
+│   │   ├── HotToolsView copy.vue     # 侧边栏组件备份副本（冗余）
+│   │   ├── HotToolsView.vue          # 右侧边栏-热门工具组件
+│   │   ├── NewArticleView.vue        # 右侧边栏-最新文章组件
+│   │   ├── NewRecordView.vue         # 右侧边栏-最新收录组件
+│   │   └── RightAsideView.vue        # 右侧边栏总容器组件
+│   ├── main/                         # 核心工具页面组件
+│   │   ├── MoreTools.vue             # 更多工具页容器
+│   │   ├── MoreToolsOutside.vue      # 首页工具展示外部容器
+│   │   ├── Write.vue                 # 写作工具页（三级默认路由）
+│   │   └── WriteToolsOutside.vue     # 写作工具卡片展示组件
+│   ├── test/                         # 首页及工具面板组件
+│   │   ├── AiToolPanel.vue           # AI工具卡片面板（带更多按钮）
+│   │   ├── AiToolPanel2.vue          # AI工具卡片面板（无更多按钮）
+│   │   ├── AiToolPanelList.vue       # AI工具面板列表容器
+│   │   ├── Home.vue                  # 主布局容器（左右分栏）
+│   │   ├── IndexView.vue             # 首页主内容区组件
+│   │   └── Wrapper.vue               # 测试用布局容器
+│   ├── AdvView.vue                   # 广告页占位组件
+│   ├── FooterCopyright.vue           # 页脚版权组件
+│   ├── HomeView.vue                  # 首页空模板（未使用）
+│   ├── HotDetail.vue                 # 热点详情页
+│   ├── HotView.vue                   # 热点轮播组件
+│   ├── MenuView.vue                  # 左侧菜单组件
+│   ├── NavView.vue                   # 顶部导航组件
+│   ├── RelevantArticle.vue           # 相关文章推荐组件
+│   ├── SearchView.vue                # 搜索页占位组件
+│   └── ToolView.vue                  # 分类页占位组件
+├── App copy.vue                      # 根组件备份副本（冗余文件）
+├── App.vue                           # 项目根组件
+└── main.js                           # 项目入口文件
 ```
 
-### 编译并为开发环境提供热重载
+---
+
+## 路由配置
+
+路由文件：`src/router/index.js`
+
+| 路径               | 层级 | 组件      | 说明                     |
+| ------------------ | ---- | --------- | ------------------------ |
+| `/`                | 一级 | -         | 重定向到 `/home`         |
+| `/home`            | 一级 | Home      | 首页布局（左右分栏）     |
+| `/home/`           | 二级 | IndexView | 首页内容（默认子路由）   |
+| `/home/layout`     | 二级 | Wrapper   | 测试布局页               |
+| `/home/HotDetail`  | 二级 | HotDetail | 热点详情页               |
+| `/home/moreTools`  | 二级 | MoreTools | 更多工具页               |
+| `/home/moreTools/` | 三级 | Write     | 写作工具页（默认子路由） |
+
+---
+
+## 页面组件详解
+
+### 1. 布局组件
+
+#### Home.vue (`src/views/test/Home.vue`)
+- **功能**：主布局容器，左右分栏结构
+- **数据流向**：
+  - 输入：无
+  - 输出：作为路由容器，嵌套子路由
+- **包含子组件**：
+  - `MenuView` - 左侧分类菜单
+  - `NavView` - 顶部导航栏
+  - `FooterCopyright` - 页脚版权
+  - `<router-view>` - 子路由渲染出口
+
+#### Wrapper.vue (`src/views/test/Wrapper.vue`)
+- **功能**：测试用布局容器
+- **数据流向**：
+  - 输入：路由参数 `id`（通过 `$route.query.id` 获取）
+  - 输出：无
+- **状态**：测试页面，功能简单
+
+---
+
+### 2. 首页内容组件
+
+#### IndexView.vue (`src/views/test/IndexView.vue`)
+- **功能**：首页主内容区，聚合展示多个模块
+- **数据流向**：
+  - 输入：无（数据由各子组件内部维护）
+  - 输出：无
+- **包含子组件**：
+  - `SearchView` - 搜索框
+  - `HotView` - 热点轮播
+  - `AiToolPanelList` - AI 工具面板列表
+  - `MoreToolsOutside` - 更多工具外部容器
+
+---
+
+### 3. 菜单与导航组件
+
+#### MenuView.vue (`src/views/MenuView.vue`)
+- **功能**：左侧分类菜单，支持折叠展开
+- **数据来源**：内部 `menuList` 数组（17个大类，部分有子分类）
+- **数据去向**：
+  - 点击子菜单项 → 跳转到 `/home/moreTools` 并携带 `id` 参数
+  - 点击有子菜单的项 → 展开/折叠子菜单
+- **关键数据结构**：
+  ```javascript
+  menuList: [
+    {
+      id: Number,
+      icon: String,       // 图标路径
+      linkText: String,   // 菜单名称
+      linkPath: String,   // 跳转路径
+      children: Array     // 子菜单（可选）
+    }
+  ]
+  ```
+
+#### NavView.vue (`src/views/NavView.vue`)
+- **功能**：顶部导航栏
+- **数据来源**：内部 `navList` 数组（6个主导航项）
+- **数据去向**：导航链接跳转（目前都指向 `/`）
+- **包含子菜单**：AI 工具集、AI 应用集、每日AI资讯、最新AI项目、AI教程资源、关于我们
+
+---
+
+### 4. 热点相关组件
+
+#### HotView.vue (`src/views/HotView.vue`)
+- **功能**：首页热点横幅轮播展示
+- **数据来源**：内部 `hotList` 数组（4条热点数据）
+- **数据去向**：点击图片 → 跳转到 `/home/HotDetail` 并携带 `imgid` 参数
+- **数据结构**：
+  ```javascript
+  hotList: [
+    {
+      id: Number,
+      text: String,           // 热点标题
+      imageUrl: String,       // 图片地址
+      pagePath: String        // 跳转路径（/HotDetail）
+    }
+  ]
+  ```
+
+#### HotDetail.vue (`src/views/HotDetail.vue`)
+- **功能**：热点资讯详情页，左右分栏布局
+- **数据来源**：
+  - 路由参数：`$route.query.imgid`（热点ID）
+  - 内部 `articles` 对象（相关文章数据）
+- **数据去向**：
+  - 向 `RightAsideView` 传递：无（边栏数据自维护）
+  - 向 `RelevantArticle` 传递：`articles` 对象（通过 `my-data` prop）
+- **包含子组件**：
+  - `RightAsideView` - 右侧边栏
+  - `RelevantArticle` - 相关文章推荐
+- **页面结构**：面包屑导航 + 资讯卡片 + 右侧边栏 + 相关文章
+
+---
+
+### 5. 工具面板组件
+
+#### AiToolPanelList.vue (`src/views/test/AiToolPanelList.vue`)
+- **功能**：AI 工具面板列表容器，展示热门工具和最新收录
+- **数据来源**：内部 `toolGroup` 和 `toolGroup2` 对象
+- **数据去向**：
+  - 向 `AiToolPanel` 传递：`toolGroup` 对象（通过 `my-data` prop）
+  - 向 `AiToolPanel2` 传递：`toolGroup2` 对象（通过 `my-data` prop）
+- **包含子组件**：`AiToolPanel`、`AiToolPanel2`
+
+#### AiToolPanel.vue (`src/views/test/AiToolPanel.vue`)
+- **功能**：AI 工具卡片面板，带"更多工具"按钮
+- **数据来源**：props 接收 `myData` 对象
+- **数据去向**：点击"更多工具" → 跳转到 `/home/moreTools` 并携带 `id` 参数
+- **显示规则**：最多显示 30 个工具（`slice(0, 30)`）
+- **布局**：6 列网格，响应式适配
+
+#### AiToolPanel2.vue (`src/views/test/AiToolPanel2.vue`)
+- **功能**：AI 工具卡片面板（无更多按钮版本）
+- **数据来源**：props 接收 `myData` 对象
+- **数据去向**：无（纯展示）
+- **区别**：相比 AiToolPanel，没有"更多工具"按钮
+
+---
+
+### 6. 更多工具组件
+
+#### MoreTools.vue (`src/views/main/MoreTools.vue`)
+- **功能**：更多工具页容器
+- **数据来源**：
+  - 路由参数：`$route.query.id`、`$route.query.list`
+  - props：`myData`
+- **数据去向**：作为路由容器，嵌套三级子路由
+- **包含子组件**：
+  - `SearchView` - 搜索框
+  - `<router-view>` - 三级路由出口
+
+#### Write.vue (`src/views/main/Write.vue`)
+- **功能**：写作工具页（三级路由默认页）
+- **数据来源**：props：`myData`
+- **状态**：空页面，待开发
+
+#### MoreToolsOutside.vue (`src/views/main/MoreToolsOutside.vue`)
+- **功能**：首页工具展示外部容器
+- **数据来源**：内部 `WriteToolList` 对象（热门写作工具数据，31条）
+- **数据去向**：向 `WriteToolsOutside` 传递：`WriteToolList`（通过 `my-data` prop）
+- **包含子组件**：`WriteToolsOutside`
+
+#### WriteToolsOutside.vue (`src/views/main/WriteToolsOutside.vue`)
+- **功能**：写作工具卡片展示组件
+- **数据来源**：props 接收 `myData` 对象
+- **数据去向**：点击"更多工具" → 跳转到 `/home/moreTools` 并携带 `id` 参数
+- **显示规则**：最多显示 30 个工具
+- **布局**：6 列网格，响应式适配（1400px/992px/640px 断点）
+
+---
+
+### 7. 右侧边栏组件
+
+#### RightAsideView.vue (`src/views/aside/RightAsideView.vue`)
+- **功能**：右侧边栏总容器，sticky 定位
+- **数据来源**：内部维护三组数据
+  - `toolList` - 热门工具列表（12条）
+  - `recordList` - 最新收录列表（6条）
+  - `articleList` - 最新文章列表（4条）
+- **数据去向**：
+  - 向 `HotToolsView` 传递：`toolList` + `toolTitle`
+  - 向 `NewRecordView` 传递：`recordList` + `recordTitle`
+  - 向 `NewArticleView` 传递：`articleList`
+- **包含子组件**：`HotToolsView`、`NewRecordView`、`NewArticleView`
+- **宽度**：300px，sticky 顶部 20px
+
+#### HotToolsView.vue (`src/views/aside/HotToolsView.vue`)
+- **功能**：热门工具展示
+- **数据来源**：props 接收 `myData` 数组
+- **数据去向**：无（纯展示，点击效果待实现）
+- **布局**：2 列网格
+
+#### NewRecordView.vue (`src/views/aside/NewRecordView.vue`)
+- **功能**：最新收录工具展示
+- **数据来源**：props 接收 `NewRecord` 数组 + `title`
+- **数据去向**：无（纯展示）
+- **布局**：2 列网格
+
+#### NewArticleView.vue (`src/views/aside/NewArticleView.vue`)
+- **功能**：最新文章列表展示
+- **数据来源**：props 接收 `myData` 对象（含 title 和 list）
+- **数据去向**：无（纯展示）
+- **布局**：左图右文列表形式
+
+---
+
+### 8. 其他组件
+
+#### SearchView.vue (`src/views/SearchView.vue`)
+- **功能**：搜索页/搜索框
+- **状态**：占位组件，仅显示"搜索页"文字
+
+#### ToolView.vue (`src/views/ToolView.vue`)
+- **功能**：分类页
+- **状态**：占位组件，仅显示"分类页"文字
+
+#### AdvView.vue (`src/views/AdvView.vue`)
+- **功能**：广告页
+- **状态**：占位组件，仅显示"广告页"文字
+
+#### HomeView.vue (`src/views/HomeView.vue`)
+- **功能**：首页视图
+- **状态**：空模板，未使用
+
+#### RelevantArticle.vue (`src/views/RelevantArticle.vue`)
+- **功能**：相关文章推荐组件
+- **数据来源**：props 接收 `myData` 对象
+  - `aixiao` - 作者头像
+  - `title` - 标题
+  - `list` - 文章列表
+- **数据去向**：无（纯展示）
+- **布局**：3 列网格
+
+#### FooterCopyright.vue (`src/views/FooterCopyright.vue`)
+- **功能**：页脚版权信息
+- **数据来源**：内部 `linkList` 数组（友情链接列表）
+- **数据去向**：无（纯展示）
+- **布局**：左右分栏，响应式堆叠
+
+---
+
+## 数据流总览
+
 ```
-npm run serve
+用户点击菜单 (MenuView)
+    ↓
+路由跳转 + 传递 query 参数 (id/imgid)
+    ↓
+对应页面组件接收参数
+    ├─ 首页 (IndexView) → 聚合各子模块
+    │   ├─ HotView → 点击跳转 HotDetail
+    │   ├─ AiToolPanelList → 展示工具卡片
+    │   └─ MoreToolsOutside → 展示写作工具
+    ├─ 热点详情 (HotDetail)
+    │   ├─ 左侧资讯内容（硬编码）
+    │   ├─ RightAsideView（右侧边栏）
+    │   │   ├─ HotToolsView（热门工具）
+    │   │   ├─ NewRecordView（最新收录）
+    │   │   └─ NewArticleView（最新文章）
+    │   └─ RelevantArticle（相关文章）
+    └─ 更多工具 (MoreTools)
+        └─ Write（写作工具页）
 ```
 
-### 用于生产环境的编译与代码压缩
-```
-npm run build
-```
+---
 
-### 检查并修复文件
-```
-npm run lint
-```
+## 备注
 
-### 自定义配置
-See [Configuration Reference](https://cli.vuejs.org/config/).
+- 项目目前大部分数据为**硬编码**在组件内部的 mock 数据
+- 多个组件结构相似（AiToolPanel / AiToolPanel2 / WriteToolsOutside），可考虑抽离为公共组件
+- 部分文件为副本（`index copy.js`、`App copy.vue`、`HotToolsView copy.vue`），可清理
+- 搜索、分类、广告等页面为占位组件，待开发
