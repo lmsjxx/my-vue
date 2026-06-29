@@ -17,6 +17,7 @@ export default {
       WriteToolList: 
         {
           id: 1,
+          tooltag:'热门写作工具',
           toolList: [
             {
               id: 1,

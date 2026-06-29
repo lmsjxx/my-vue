@@ -3,6 +3,7 @@
         <!-- 更多工具页 -->
         <SearchView></SearchView>
         {{ this.$route.query.id }}
+        {{ this.$route.query.list }}
         <router-view></router-view>
     </div>
 </template>
@@ -15,8 +16,10 @@ export default{
     components:{
         NavView,
         SearchView
-    }
+    },
+    props:['myData']
 }
+
 </script>
 
 <style lang="scss" scoped>
