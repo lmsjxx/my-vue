@@ -11,7 +11,7 @@
             }">
               <img :src="hot.imageUrl" alt="">
             </router-link>
-          </li>/
+          </li>
         </ul>
     </div>
 </template>
