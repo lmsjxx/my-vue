@@ -13,21 +13,25 @@
         <!-- 单页面应用的右侧渲染区域 -->
         <div class="home-wrapper my-box my-p15">
             <!-- <index-view></index-view> -->
+            <nav-view></nav-view>
             <router-view></router-view>
+            <FooterCopyright></FooterCopyright>
         </div>
-        
     </div>
+    
 </template>
 
 <script>
 import MenuView from '../MenuView.vue';
 import Wrapper from './Wrapper.vue';
+import NavView from '../NavView.vue';
 
 export default {
     name: 'home',
     components :{
         MenuView,
         Wrapper,
+        NavView
     }
 }
 </script>

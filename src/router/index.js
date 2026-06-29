@@ -4,10 +4,14 @@ import IndexView from "@/views/test/IndexView.vue";
 import HotDetail from "@/views/HotDetail.vue";
 import Vue from "vue";
 import VueRouter from "vue-router";
+import FooterCopyright from "@/views/FooterCopyright.vue";
+import MoreTools from "@/views/main/MoreTools.vue";
+import Write from "@/views/main/Write.vue";
 
 
 
 Vue.use(VueRouter)
+Vue.component('FooterCopyright',FooterCopyright)
 
 // 解决重复点击报错
 const originalPush = VueRouter.prototype.push
@@ -42,6 +46,18 @@ const routes = [
             {
                 path: 'HotDetail',
                 component: HotDetail
+            },
+            // 更多工具界面三级路由
+            {
+                path: 'moreTools',
+                component:MoreTools,
+                children:[
+                    {
+                        path:"",
+                        component:Write
+                    },
+
+                ]
             }
         ]
     }

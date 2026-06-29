@@ -182,7 +182,7 @@ export default {
   methods: {
     jump(id) {
       this.$router.push({
-        path: "/home/layout",
+        path: "/home/moreTools",
         query: {
           id: id,
         },
