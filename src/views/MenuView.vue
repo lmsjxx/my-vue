@@ -9,13 +9,18 @@
       >
         <div class="menu-title">
           <span class="title-text">
-          <img v-if="menu.icon" :src="require(`@/assets/${menu.icon}`)" class="menu-icon" alt="">
-          {{ menu.linkText }}
+            <img
+              v-if="menu.icon"
+              :src="require(`@/assets/${menu.icon}`)"
+              class="menu-icon"
+              alt=""
+            />
+            {{ menu.linkText }}
           </span>
           <span
-          v-if="menu.children"
-          class="arrow"
-          :class="{ rotate: showID === menu.id }"
+            v-if="menu.children"
+            class="arrow"
+            :class="{ rotate: showID === menu.id }"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -31,13 +36,14 @@
             </svg>
           </span>
         </div>
-            <div class="sub-wrap" :class="{ open: showID === menu.id }">
-              <div v-for="text in menu.children" :key="text.id" class="sub-item">
-                <div @click="jump(text.id)" class="childText">
-                  {{ text.linkText }}
-                </div>
-              </div>
+        <div class="sub-wrap" :class="{ open: showID === menu.id }">
+          <div v-for="text in menu.children" :key="text.id" class="sub-item">
+            <!-- 第二个参数传入父菜单 menu -->
+            <div @click="jump(text, menu)" class="childText">
+              {{ text.linkText }}
             </div>
+          </div>
+        </div>
       </li>
     </ul>
   </div>
@@ -59,16 +65,16 @@ export default {
           id: 2,
           icon: "svg/image-fill.svg",
           linkText: "AI图像工具",
-          linkPath: "",
+          linkPath: "layout",
           children: [
-            { id: 1001, linkText: "常用AI图像工具" },
-            { id: 1002, linkText: "AI图片插画生成" },
-            { id: 1003, linkText: "AI图片背景移除" },
-            { id: 1004, linkText: "AI图片物体抹除" },
-            { id: 1005, linkText: "AI图片无损放大" },
-            { id: 1006, linkText: "AI图片优化修复" },
-            { id: 1007, linkText: "AI商品图生成" },
-            { id: 1008, linkText: "AI 3D模型生成" },
+            { id: 1001, linkText: "常用AI图像工具", path: "layout" },
+            { id: 1002, linkText: "AI图片插画生成", path: "layout" },
+            { id: 1003, linkText: "AI图片背景移除", path: "layout" },
+            { id: 1004, linkText: "AI图片物体抹除", path: "layout" },
+            { id: 1005, linkText: "AI图片无损放大", path: "layout" },
+            { id: 1006, linkText: "AI图片优化修复", path: "layout" },
+            { id: 1007, linkText: "AI商品图生成", path: "layout" },
+            { id: 1008, linkText: "AI 3D模型生成", path: "layout" },
           ],
         },
         {
@@ -81,7 +87,7 @@ export default {
           id: 4,
           icon: "svg/image-fill.svg",
           linkText: "AI办公工具",
-          linkPath: "",
+          linkPath: "AIOfficeTool",
           children: [
             { id: 401, linkText: "AI幻灯片和演示" },
             { id: 402, linkText: "AI表格数据处理" },
@@ -180,30 +186,23 @@ export default {
     };
   },
   methods: {
-    jump(id) {
+    jump(childItem, parentMenu) {
+      const targetPath = childItem.path || parentMenu.linkPath;
+      if (!targetPath) {
+        console.log("当前菜单未配置跳转路径", childItem, parentMenu);
+        return;
+      }
       this.$router.push({
-        path: "/home/moreTools",
-        query: {
-          id: id,
-        },
+        path: "/home/" + targetPath,
       });
     },
-    toggleShow(id) {
-      if (this.showID === id) {
-        this.showID = null;
-      } else {
-        this.showID = id;
-      }
-    },
     isJump(object) {
+      // 父菜单点击
       if (object.children && object.children.length > 0) {
-        if (this.showID === object.id) {
-          this.showID = null;
-        } else {
-          this.showID = object.id;
-        }
+        this.showID = this.showID === object.id ? null : object.id;
       } else {
-        this.jump(object.id);
+        // 无子菜单的一级菜单，自身跳转，第二个参数传自身当父级
+        this.jump(object, object);
       }
     },
   },
@@ -211,7 +210,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.icon{
+.icon {
   display: flex;
 }
 #menu {
@@ -239,7 +238,6 @@ li {
       background: #e0e0e0;
       color: #5961f9;
       padding-left: 22px;
-      
     }
 
     /* 左侧文字，不挤压箭头 */

@@ -7,7 +7,7 @@ import VueRouter from "vue-router";
 import FooterCopyright from "@/views/FooterCopyright.vue";
 import MoreTools from "@/views/main/MoreTools.vue";
 import Write from "@/views/main/Write.vue";
-
+import AIOfficeTool from "@/views/test/AIOfficeTool.vue";
 
 
 Vue.use(VueRouter)
@@ -37,7 +37,11 @@ const routes = [
         children: [
             {
                 path: 'layout',
-                component: Wrapper
+                component: Wrapper,
+            },
+            {
+                path: 'AIOfficeTool',
+                component:AIOfficeTool
             },
             {
                 path: '',
